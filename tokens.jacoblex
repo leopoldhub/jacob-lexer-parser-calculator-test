@@ -16,6 +16,8 @@ dot = \.
 
 <>{digit}+    {this.jjval = parseInt(this.jjtext);return 'INTEGER';}
 
+<>\w+    {return 'INST-'+this.jjtext;}
+
 <>\s*    {}
 
 <>.    {return this.jjtext;}

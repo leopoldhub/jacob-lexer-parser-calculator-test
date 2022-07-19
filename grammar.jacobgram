@@ -2,6 +2,8 @@
 
 %left '+' '-'
 %left '*' '/'
+%left '^' '%'
+%left 'INST-MIN' 'INST-MAX'
 
 Program = { Statement } function(){};
 
@@ -11,6 +13,10 @@ Expression = Expression '+' Expression function(exp1, _, exp2){return exp1+exp2;
  | Expression '-' Expression function(exp1, _, exp2){return exp1-exp2;}
  | Expression '*' Expression function(exp1, _, exp2){return exp1*exp2;}
  | Expression '/' Expression function(exp1, _, exp2){return exp1/exp2;}
+ | Expression '^' Expression function(exp1, _, exp2){return Math.pow(exp1,exp2);}
+ | Expression '%' Expression function(exp1, _, exp2){return exp1%exp2;}
+ | Expression 'INST-MIN' Expression function(exp1, _, exp2){return Math.min(exp1,exp2);}
+ | Expression 'INST-MAX' Expression function(exp1, _, exp2){return Math.max(exp1,exp2);}
  | '(' Expression ')' function(_, value){return value;}
  | 'INTEGER' function(value){return value;}
  | 'FLOAT' function(value){return value;}
