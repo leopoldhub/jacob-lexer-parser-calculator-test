@@ -1,0 +1,24 @@
+%modulename CalculatorLexer
+
+%%
+
+digit = \d
+
+dot = \.
+
+%%
+
+<>\/\*    {this.pushState('BLOCKCOMMENT');}
+<BLOCKCOMMENT>\*\/    {this.popState();}
+<BLOCKCOMMENT>(\n|\r|.) {}
+
+<>{digit}+({dot}{digit}+)+    {this.jjval = parseFloat(this.jjtext);return 'FLOAT';}
+
+<>{digit}+    {this.jjval = parseInt(this.jjtext);return 'INTEGER';}
+
+<>\s*    {}
+
+<>.    {return this.jjtext;}
+
+<>$    {return 'EOF';}
+

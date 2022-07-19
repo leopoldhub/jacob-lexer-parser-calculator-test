@@ -1,0 +1,17 @@
+%modulename CalculatorParser
+
+%left '+' '-'
+%left '*' '/'
+
+Program = { Statement } function(){};
+
+Statement = Expression function(exp){console.log(exp);};
+
+Expression = Expression '+' Expression function(exp1, _, exp2){return exp1+exp2;}
+ | Expression '-' Expression function(exp1, _, exp2){return exp1-exp2;}
+ | Expression '*' Expression function(exp1, _, exp2){return exp1*exp2;}
+ | Expression '/' Expression function(exp1, _, exp2){return exp1/exp2;}
+ | '(' Expression ')' function(_, value){return value;}
+ | 'INTEGER' function(value){return value;}
+ | 'FLOAT' function(value){return value;}
+;
